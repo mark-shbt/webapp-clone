@@ -95,6 +95,12 @@ export class CheckoutPage implements OnInit {
     if (defaultAddr) {
       this.deliveryForm.patchValue({ address: defaultAddr.street });
     }
+    // Pre-select first available expense type so allowance section is visible
+    const firstAvailable = this.allowanceService.expenseTypes()
+      .find(et => this.allowanceService.getRemaining(et.id) > 0);
+    if (firstAvailable) {
+      this.selectedExpenseTypeId.set(firstAvailable.id);
+    }
   }
 
   get savedAddresses() { return this.authService.currentUser()?.addresses ?? []; }
