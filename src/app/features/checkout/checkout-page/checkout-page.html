@@ -91,7 +91,7 @@
                 <option value="">Pay with personal card</option>
                 @for (et of allowanceService.expenseTypes(); track et.id) {
                   <option [value]="et.id" [disabled]="allowanceService.getRemaining(et.id) === 0">
-                    {{ et.name }}
+                    {{ et.name }} — {{ allowanceService.getRemaining(et.id) | currencyFormat }} remaining
                     @if (allowanceService.getRemaining(et.id) === 0) { (depleted) }
                   </option>
                 }
